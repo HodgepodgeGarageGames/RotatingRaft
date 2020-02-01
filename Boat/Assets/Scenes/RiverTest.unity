@@ -150,9 +150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4373a54d1246cd74c87a4b6fbdb5837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftEdge: -10
-  bendRange: 3
-  widthRange: 0.5
+  widthMax: 1
+  widthMin: 0.5
+  bendRange: 2
+  zetaRange: 0.1
+  segmentLength: 2
+  numberOfSegments: 10
+  numberOfZetaSegments: 3
 --- !u!4 &499815910
 Transform:
   m_ObjectHideFlags: 0
@@ -247,7 +251,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.14017443, g: 0.3962264, b: 0.20507006, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
