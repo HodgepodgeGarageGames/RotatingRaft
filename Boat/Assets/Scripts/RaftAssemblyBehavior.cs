@@ -6,6 +6,7 @@ public class RaftAssemblyBehavior : MonoBehaviour
 {
     public float            angularVelocity = 30;
     private Rigidbody2D     raftBody;
+    PlayersAssemblyBehavior players;
 
     // Start is called before the first frame update
     void Start()
@@ -15,23 +16,16 @@ public class RaftAssemblyBehavior : MonoBehaviour
         //raftBody.angularVelocity = -spinPerSecond;
         //raftBody.angularDrag = 0f;
 
+        players = GetComponentInChildren<PlayersAssemblyBehavior>();
     }
 
-    static int count = 0;
     // Update is called once per frame
     void FixedUpdate()
     {
         float time = Time.fixedDeltaTime;
-        transform.Rotate(0f, 0f, time*-angularVelocity);
-        PlayersAssemblyBehavior players;
-        ++count;
-        try {
-            players = GetComponentInChildren<PlayersAssemblyBehavior>();
-            players.Straighten();
-        }
-        catch {
-            throw new System.Exception("bad" + count);
-        }
-        throw new System.Exception("okay" + count);
+        float rot = time*-angularVelocity;
+        transform.Rotate(0f, 0f, rot);
+        players.Straighten();
+        players.RotateBy(rot);
     }
 }

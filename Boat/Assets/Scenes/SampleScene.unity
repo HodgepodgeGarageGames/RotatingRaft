@@ -218,8 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bfd0d4bf379e147b994bfd6b32c448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 0, y: 0}
-  wallBlueprint: {fileID: 0}
 --- !u!4 &209899628
 Transform:
   m_ObjectHideFlags: 0
@@ -252,19 +250,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &427391684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427391683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58ec5671e5f29a948b53b8136fff69f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spinPerSecond: 30
 --- !u!212 &427391685
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -326,8 +311,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 196641518}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &427391687
 Rigidbody2D:
@@ -478,3 +463,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8270280168005459394, guid: 524b9c02c025eea41b3303b5dfed4a5b,
     type: 3}
+  playerSpeed: 1

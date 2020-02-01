@@ -11,22 +11,28 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         transform.position = new Vector2(-1,0);
-        speed = transform.Find("PlayersAssembly")
-            .GetComponent<PlayersAssemblyBehavior>().playerSpeed;
+        speed = GetComponentInParent<PlayersAssemblyBehavior>().playerSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
         int x = 0, y = 0;
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            x = 1;
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            x = -1;
-
         var body = GetComponent<Rigidbody2D>();
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            body.velocity = new Vector2(0,0);
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            ++x;
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            --x;
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            --y;
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            ++y;
+
         var v = body.velocity;
-        float factor = .01f;
-        body.velocity = new Vector2(v.x + x * factor, v.y);
+        body.velocity = new Vector2(v.x + x * speed, v.y + y * speed);
     }
 }
