@@ -6,7 +6,9 @@ public class PlayersAssemblyBehavior : MonoBehaviour
 {
     public GameObject               playerPrefab;
     private List<Transform>         players = new List<Transform>();
-    public float                    playerSpeed = 1f;
+    public float                    playerMaxSpeed = 1f;
+    public float                    playerAcceleration = 1f; // secs per sec
+    public float                    playerFriction = 4f; // secs per sec
 
     // Start is called before the first frame update
     void Start()
