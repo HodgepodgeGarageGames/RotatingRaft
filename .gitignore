@@ -2,16 +2,19 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+/Boat/[Ll]ibrary/
+/Boat/[Tt]emp/
+/Boat/[Oo]bj/
+/Boat/[Bb]uild/
+/Boat/[Bb]uilds/
+/Boat/[Ll]ogs/
+/Boat/[Mm]emoryCaptures/
+
+# Micah's vscode settings
+/Boat/.vscode/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
-!/[Aa]ssets/**/*.meta
+!/Boat/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
