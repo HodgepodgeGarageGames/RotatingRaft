@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaftBehavior : MonoBehaviour
+public class RaftAssemblyBehavior : MonoBehaviour
 {
     public float            angularVelocity = 30;
     private Rigidbody2D     raftBody;
