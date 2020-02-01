@@ -17,12 +17,21 @@ public class RaftAssemblyBehavior : MonoBehaviour
 
     }
 
+    static int count = 0;
     // Update is called once per frame
     void FixedUpdate()
     {
         float time = Time.fixedDeltaTime;
         transform.Rotate(0f, 0f, time*-angularVelocity);
-        var playBeh = transform.Find("PlayersAssembly").GetComponent<PlayersAssemblyBehavior>();
-        playBeh.Straighten();
+        PlayersAssemblyBehavior players;
+        ++count;
+        try {
+            players = GetComponentInChildren<PlayersAssemblyBehavior>();
+            players.Straighten();
+        }
+        catch {
+            throw new System.Exception("bad" + count);
+        }
+        throw new System.Exception("okay" + count);
     }
 }
