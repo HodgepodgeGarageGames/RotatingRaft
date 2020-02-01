@@ -18,7 +18,7 @@ public class RiverController : MonoBehaviour
             wall[i] = new GameObject[size.y];
             for (int j = 0; j < size.y; ++j)
             {
-                wall[i][j] = Instantiate(wallBlueprint, new Vector3 (), new Quaternion ())
+                wall[i][j] = Instantiate(wallBlueprint, new Vector3 (), new Quaternion ());
             }
         }
     }
