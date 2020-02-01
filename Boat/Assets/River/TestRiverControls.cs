@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class TestRiverControls : MonoBehaviour
 {
-    public RiverController river = null;
+    public NuRiver river = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            river.moveRiver(Vector3.right * Time.deltaTime);
-        }
-
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             river.moveRiver(Vector3.left * Time.deltaTime);
