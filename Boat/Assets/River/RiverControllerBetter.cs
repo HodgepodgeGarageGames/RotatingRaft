@@ -2,32 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RiverController : MonoBehaviour
+public class RiverControllerBetter : MonoBehaviour
 {
-    public class hole
+    public class Hole
     {
         public Vector2Int loc = Vector2Int.zero;
-        public int width = 0;
+        public int radLength = 0;
 
-        public hole(Vector2Int LOC, int WIDTH)
+        public Hole(Vector2Int LOC, int RADLENGTH, GameObject[][] wall)
         {
             loc = LOC;
-            width = WIDTH;
+            radLength = RADLENGTH;
+
+            carve(wall);
         }
 
-        public void adjust(Vector2Int size)
+        private void carve (GameObject[][] wall)
         {
-            if (loc.y <= width)
+            for (int i = loc.x - radLength; i <= loc.x + radLength; ++i)
             {
-                loc.y += Random.Range(0, 2);
+                for (int j = loc.y - radLength; j <= loc.y + radLength; ++j)
+                {
+                    wall[i][j].SetActive(false);
+                }
             }
-            else if (loc.y >= size.y - 1 - width)
+        }
+
+        public void move (GameObject[][] wall, int y)
+        {
+            if (y > loc.y)
             {
-                loc.y -= Random.Range(0, 2);
-            }
-            else
-            {
-                loc.y += Random.Range(-1, 2);
+                for (int i = loc.x - radLength; i <= loc.x + radLength; ++i)
+                {
+                    for (int j = loc.y - radLength; j <= loc.y + radLength; ++j)
+                    {
+                        wall[i][j].SetActive(false);
+                    }
+                }
             }
         }
     }
@@ -36,7 +47,7 @@ public class RiverController : MonoBehaviour
     [SerializeField] private GameObject wallBlueprint = null;
     [SerializeField] private float sectionScale = 1.0f;
     private GameObject[][] wall;
-    private hole frontHole = null;
+    private Hole hole = null;
 
     // Start is called before the first frame update
     void Start()
@@ -58,19 +69,12 @@ public class RiverController : MonoBehaviour
             }
         }
 
-        frontHole = new hole(new Vector2Int(size.x - 1, size.y / 2), 3);
-
-        moveRiver(Vector3.left * (size.x * sectionScale));
+        hole = new Hole(new Vector2Int (size.x / 2, size.y / 2), 3, wall);
     }
 
     public void moveRiver(Vector3 vec)
     {
         transform.position += vec;
-
-        while (transform.position.x > sectionScale)
-        {
-            shiftLeft();
-        }
 
         while (transform.position.x <= -sectionScale)
         {
@@ -78,29 +82,9 @@ public class RiverController : MonoBehaviour
         }
     }
 
-    private void shiftLeft()
-    {
-        transform.position -= transform.right * sectionScale;
-        frontHole.adjust(size);
-
-        for (int i = size.x - 1; i > 0; --i)
-        {
-            for (int j = 0; j < size.y; ++j)
-            {
-                wall[i][j].SetActive(wall[i - 1][j].activeSelf);
-            }
-        }
-
-        for (int j = 0; j < size.y; ++j)
-        {
-            wall[0][j].SetActive(true);
-        }
-    }
-
     private void shiftRight()
     {
         transform.position += transform.right * sectionScale;
-        frontHole.adjust(size);
 
         for (int i = 0; i < size.x - 1; ++i)
         {
@@ -113,15 +97,8 @@ public class RiverController : MonoBehaviour
         for (int j = 0; j < size.y; ++j)
         {
             wall[size.x - 1][j].SetActive(true);
-            holeymoley(size.x - 1, j, frontHole);
-        }
-    }
+            
 
-    private void holeymoley(int i, int j, hole h)
-    {
-        if (System.Math.Abs(i - h.loc.x) + System.Math.Abs(j - h.loc.y) <= h.width)
-        {
-            wall[i][j].SetActive(false);
         }
     }
 }
