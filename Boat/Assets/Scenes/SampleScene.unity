@@ -463,4 +463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8270280168005459394, guid: 524b9c02c025eea41b3303b5dfed4a5b,
     type: 3}
-  playerSpeed: 1
+  playerMaxSpeed: 2
+  playerAcceleration: 32
+  playerFriction: 8
