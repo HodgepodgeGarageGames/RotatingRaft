@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Raft
+    uniqueID: 412419029
+    locked: 0
+  - name: Players
+    uniqueID: 3808618015
+    locked: 0
