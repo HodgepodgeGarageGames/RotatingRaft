@@ -27,6 +27,9 @@ public class PlayerBehavior : MonoBehaviour
     {
         Friction();
         HandleControls();
+
+        var anim = GetComponent<Animator>();
+        anim.SetFloat("speed",body.velocity.sqrMagnitude);
     }
 
     void HandleControls() {
@@ -39,10 +42,16 @@ public class PlayerBehavior : MonoBehaviour
             body.velocity = new Vector2(0,0);
             return;
         }
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)) {
             ++x;
-        if (Input.GetKey(KeyCode.LeftArrow))
+            Vector3 ov = transform.localScale;
+            transform.localScale = new Vector3(Mathf.Abs(ov.x), ov.y, ov.z);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow)) {
             --x;
+            Vector3 ov = transform.localScale;
+            transform.localScale = new Vector3(-Mathf.Abs(ov.x), ov.y, ov.z);
+        }
         if (Input.GetKey(KeyCode.DownArrow))
             --y;
         if (Input.GetKey(KeyCode.UpArrow))
