@@ -18,6 +18,16 @@ public class MotorBehavior : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider) {
         var pb = collider.gameObject.GetComponent<PlayerBehavior>();
-        if (pb) pb.OnMotorStay(transform);
+        if (pb) pb.OnMotorStay(this);
+    }
+
+    public void Thrust() {
+        NuRiver river = null;
+        foreach (var obj in gameObject.scene.GetRootGameObjects()) {
+            river = obj.GetComponent<NuRiver>();
+            if (river != null) break;
+        }
+        string r = river == null? "not ": "";
+        Debug.Log($"Thrust! Motor {gameObject.name} (river {r}found)");
     }
 }

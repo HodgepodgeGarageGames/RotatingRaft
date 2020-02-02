@@ -100,7 +100,7 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    public void OnMotorStay(Transform motorTransform) {
-        //Debug.Log("In " + motorTransform.gameObject.name);
+    public void OnMotorStay(MotorBehavior motor) {
+        if (input.a) motor.Thrust();
     }
 }
