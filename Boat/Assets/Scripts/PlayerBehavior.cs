@@ -99,4 +99,8 @@ public class PlayerBehavior : MonoBehaviour
             );
         }
     }
+
+    public void OnMotorStay(Transform motorTransform) {
+        //Debug.Log("In " + motorTransform.gameObject.name);
+    }
 }
