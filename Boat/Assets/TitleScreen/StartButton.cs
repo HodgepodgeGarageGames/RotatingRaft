@@ -20,7 +20,7 @@ public class StartButton : MonoBehaviour
         if (abuttons[0].checkedIn || abuttons[1].checkedIn || abuttons[2].checkedIn || abuttons[3].checkedIn)
         {
             image.gameObject.SetActive(true);
-            image.localScale = Vector3.one * (0.75f + (Mathf.Sin(Time.time * 1.0f) * 0.25f));
+            image.localScale = Vector3.one * (0.9f + (Mathf.Sin(Time.time * 1.0f) * 0.1f));
 
             for (int i = 0; i < 4; ++i)
             {

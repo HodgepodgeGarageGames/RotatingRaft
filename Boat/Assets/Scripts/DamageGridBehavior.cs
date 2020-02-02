@@ -13,6 +13,7 @@ public class DamageGridBehavior : MonoBehaviour
     void Start()
     {
         tileGrid = new Transform[gridWidth, gridHeight];
+
         for (int i=0; i != gridHeight; ++i) {
             for (int j=0; j != gridWidth; ++j) {
                 var pos = new Vector3(
@@ -22,6 +23,7 @@ public class DamageGridBehavior : MonoBehaviour
                 );
                 var obj = Instantiate(tileObject, pos, Quaternion.identity, transform);
                 obj.name = $"Damage Tile [{i}, {j}]";
+                tileGrid[i, j] = obj.transform;
                 //checkerboard
                 if ((i % 3) != 0 || (j % 3) != 0) {
                     obj.SetActive(false);
@@ -30,9 +32,47 @@ public class DamageGridBehavior : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Transform getClosestDamagedTile(Vector3 pos, float dist)
     {
-        
+        Transform closest = null;
+
+        for (int i = 0; i < gridWidth; ++i)
+        {
+            for (int j = 0; j < gridHeight; ++j)
+            {
+                if (tileGrid[i,j].gameObject.activeSelf)
+                {
+                    float mag = (tileGrid[i, j].position - pos).magnitude;
+
+                    if (closest == null)
+                    {
+                        if (mag <= dist)
+                            closest = tileGrid[i, j];
+                    }
+                    else
+                    {
+                        if (mag < (closest.position - pos).magnitude && mag <= dist)
+                            closest = tileGrid[i, j];
+                    }
+                }
+            }
+        }
+
+        return closest;
+    }
+
+    public void repairTile(Transform tile)
+    {
+        for (int i = 0; i < gridWidth; ++i)
+        {
+            for (int j = 0; j < gridHeight; ++j)
+            {
+                if (tileGrid[i, j] == tile)
+                {
+                    tile.gameObject.SetActive(false);
+                    return;
+                }
+            }
+        }
     }
 }

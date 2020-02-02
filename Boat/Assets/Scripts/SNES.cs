@@ -9,14 +9,16 @@ public static class SNES
         private string horizontal;
         private string vertical;
         private string a;
+        private string b;
         private string start;
         private string select;
 
-        public GamePad(string H, string V, string A, string START, string SELECT)
+        public GamePad(string H, string V, string A, string B, string START, string SELECT)
         {
             horizontal = H;
             vertical = V;
             a = A;
+            b = B;
             start = START;
             select = SELECT;
         }
@@ -75,12 +77,27 @@ public static class SNES
         {
             return Input.GetButtonUp(select);
         }
+
+        public bool B()
+        {
+            return Input.GetButton(b);
+        }
+
+        public bool BDown()
+        {
+            return Input.GetButtonDown(b);
+        }
+
+        public bool BUp()
+        {
+            return Input.GetButtonUp(b);
+        }
     }
 
     public static GamePad[] gamePad = {
-        new GamePad("P1Horizontal", "P1Vertical", "P1A", "P1Start", "P1Select"),
-        new GamePad("P2Horizontal", "P2Vertical", "P2A", "P2Start", "P2Select"),
-        new GamePad("P3Horizontal", "P3Vertical", "P3A", "P3Start", "P3Select"),
-        new GamePad("P4Horizontal", "P4Vertical", "P4A", "P4Start", "P4Select")
+        new GamePad("P1Horizontal", "P1Vertical", "P1A", "P1B", "P1Start", "P1Select"),
+        new GamePad("P2Horizontal", "P2Vertical", "P2A", "P2B", "P2Start", "P2Select"),
+        new GamePad("P3Horizontal", "P3Vertical", "P3A", "P3B", "P3Start", "P3Select"),
+        new GamePad("P4Horizontal", "P4Vertical", "P4A", "P4B", "P4Start", "P4Select")
     };
 }
