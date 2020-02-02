@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     Rigidbody2D body;
+    private PlayerInput.PlayerInputReceiver input;
     public float       accel {
         get { return GetComponentInParent<PlayersAssemblyBehavior>().playerAcceleration; }
     }
@@ -20,6 +21,8 @@ public class PlayerBehavior : MonoBehaviour
     {
         transform.position = new Vector2(-1,0);
         body = GetComponent<Rigidbody2D>();
+        var p = GetComponentInParent<PlayersAssemblyBehavior>();
+        input = PlayerInput.GetInputReceiver(p.GetPlayerIndex(transform));
     }
 
     // Update is called once per frame
@@ -38,23 +41,25 @@ public class PlayerBehavior : MonoBehaviour
             body.velocity = transform.position = new Vector2(0,0);
             return;
         }
-        if (Input.GetKey(KeyCode.Space)) {
+        if (input.a) {
             body.velocity = new Vector2(0,0);
             return;
         }
-        if (Input.GetKey(KeyCode.RightArrow)) {
+        if (input.right) {
             ++x;
             Vector3 ov = transform.localScale;
+            // Point sprite leftwards
             transform.localScale = new Vector3(Mathf.Abs(ov.x), ov.y, ov.z);
         }
-        if (Input.GetKey(KeyCode.LeftArrow)) {
+        if (input.left) {
             --x;
             Vector3 ov = transform.localScale;
+            // Point sprite rightwards
             transform.localScale = new Vector3(-Mathf.Abs(ov.x), ov.y, ov.z);
         }
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (input.down)
             --y;
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (input.up)
             ++y;
 
         var v = body.velocity;

@@ -45,4 +45,9 @@ public class PlayersAssemblyBehavior : MonoBehaviour
             );
         }
     }
+
+    public int GetPlayerIndex(Transform player)
+    {
+        return players.FindIndex((o) => {return o == player;});
+    }
 }
