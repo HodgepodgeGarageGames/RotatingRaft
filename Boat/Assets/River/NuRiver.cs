@@ -28,10 +28,20 @@ public class NuRiver : MonoBehaviour
 
     private List<GameObject> landscape = new List<GameObject>();
 
+    private Vector3 vel = Vector3.zero;
+
+    private Rigidbody2D rb2d = null;
+
+    private Vector2 riverOldPos;
+
     // Start is called before the first frame update
     void Start()
     {
+        rb2d = GetComponent<Rigidbody2D>();
+
         widthMod = widthMax;
+
+        riverOldPos = rb2d.position;
 
         //Line renderer
         GameObject middleGO = new GameObject("Middle Line");
@@ -83,7 +93,8 @@ public class NuRiver : MonoBehaviour
         copy(ref bottomEdge, bottom, false);
 
         //Stuff
-        moveRiver(Vector3.left * ((float)numberOfSegments) / 2.0f * segmentLength);
+        rb2d.MovePosition(Vector3.left * ((float)numberOfSegments) / 2.0f * segmentLength);
+        //moveRiver(Vector3.left * ((float)numberOfSegments) / 2.0f * segmentLength);
 
         //Water Mesh
         waterFilter = gameObject.AddComponent<MeshFilter>();
@@ -94,8 +105,10 @@ public class NuRiver : MonoBehaviour
 
     public void moveRiver(Vector3 vec)
     {
-        transform.position += vec;
-        moveLandscape(vec);
+        moveLandscape(rb2d.position - riverOldPos);
+        riverOldPos = rb2d.position;
+
+        rb2d.AddForce(vec);
 
         while (transform.position.x <= -((segmentLength * numberOfSegments) / 2.0f) - segmentLength)
         {
@@ -397,6 +410,7 @@ public class NuRiver : MonoBehaviour
 
     private void Update()
     {
+        //Water animation
         float maxT = 1.0f;
         float t = Mathf.Repeat(Time.time, maxT);
 
@@ -406,6 +420,15 @@ public class NuRiver : MonoBehaviour
             waterRenderer.material = waterTexture[1];
         else
             waterRenderer.material = waterTexture[2];
+    }
+
+    private void FixedUpdate()
+    {
+        //Raft movement
+        vel -= Vector3.right * Time.fixedDeltaTime * 0.1f;
+        //vel *= 0.98f;
+
+        moveRiver(vel);
     }
 
     private void moveLandscape(Vector3 vec)
@@ -455,6 +478,19 @@ public class NuRiver : MonoBehaviour
 
     private void killLandscape()
     {
+        List<GameObject> killList = new List<GameObject>();
+        foreach (GameObject g in landscape)
+        {
+            if (g.transform.position.x < -15.0f)
+            {
+                killList.Add(g);
+            }
+        }
 
+        foreach (GameObject g in killList)
+        {
+            landscape.Remove(g);
+            Destroy(g);
+        }
     }
 }
