@@ -13,6 +13,14 @@ public class Music : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.M)) {
+            var audio = GetComponent<AudioSource>();
+            if (audio.isPlaying) {
+                audio.Pause();
+            }
+            else {
+                audio.UnPause();
+            }
+        }
     }
 }
