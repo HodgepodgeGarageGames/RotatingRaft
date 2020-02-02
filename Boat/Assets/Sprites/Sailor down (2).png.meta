@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: aa1fa4b8fda06924fabfe6fa99abf34e
+guid: e8e479bff0d67a043adb8b55ba018b73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7632626373463945720
-    second: Merman left_0
+      213: -8117784134391209967
+    second: Sailor down (2)_0
+  - first:
+      213: -8542683898596940268
+    second: Sailor down (2)_1
+  - first:
+      213: 1826926815803531055
+    second: Sailor down (2)_2
+  - first:
+      213: -5328413441406729985
+    second: Sailor down (2)_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -89,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Merman left_0
+      name: Sailor down (2)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -103,8 +112,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f1b89d4f398ce960800000000000000
-      internalID: 7632626373463945720
+      spriteID: 1106f42f656d75f80800000000000000
+      internalID: -8117784134391209967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sailor down (2)_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4162eab514a427980800000000000000
+      internalID: -8542683898596940268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sailor down (2)_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2fda9e624c8a5910800000000000000
+      internalID: 1826926815803531055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sailor down (2)_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff00988c43cad06b0800000000000000
+      internalID: -5328413441406729985
       vertices: []
       indices: 
       edges: []

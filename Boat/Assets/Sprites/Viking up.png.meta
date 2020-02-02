@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: aa1fa4b8fda06924fabfe6fa99abf34e
+guid: d18df11c50ded104e856a13199448202
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7632626373463945720
-    second: Merman left_0
+      213: -5907255621507209041
+    second: Viking up_0
+  - first:
+      213: 4411757152789659005
+    second: Viking up_1
+  - first:
+      213: 2348547745539305479
+    second: Viking up_2
+  - first:
+      213: 4353484009046401429
+    second: Viking up_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -89,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Merman left_0
+      name: Viking up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -103,8 +112,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f1b89d4f398ce960800000000000000
-      internalID: 7632626373463945720
+      spriteID: fa822aa6f46350ea0800000000000000
+      internalID: -5907255621507209041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Viking up_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7df05781c5b93d30800000000000000
+      internalID: 4411757152789659005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Viking up_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7003aee3bb7b79020800000000000000
+      internalID: 2348547745539305479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Viking up_3
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 591ed86f3aeaa6c30800000000000000
+      internalID: 4353484009046401429
       vertices: []
       indices: 
       edges: []
