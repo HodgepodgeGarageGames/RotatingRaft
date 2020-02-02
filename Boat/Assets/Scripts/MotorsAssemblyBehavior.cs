@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MotorsAssemblyBehavior : MonoBehaviour
 {
-    public GameObject motor;
+    public GameObject   motor;
+    public float        thrust;
     private Transform[] motors;
     private const int numMotors = 4;
 

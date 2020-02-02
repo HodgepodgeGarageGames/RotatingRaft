@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 8353439831774208061, guid: 1aa018fc999639545932595aea06a64d, type: 3}
+  thrust: 12
 --- !u!1 &3933474175208150488
 GameObject:
   m_ObjectHideFlags: 0
