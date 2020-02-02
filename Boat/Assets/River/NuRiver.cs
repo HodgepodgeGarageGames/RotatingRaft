@@ -11,6 +11,9 @@ public class NuRiver : MonoBehaviour
     [SerializeField] private float segmentLength = 1.0f;
     [SerializeField] private int numberOfSegments = 20;
     [SerializeField] private int numberOfZetaSegments = 2;
+    [SerializeField] private Material[] waterTexture = new Material[3];
+    [SerializeField] private GameObject[] treesNcrap = new GameObject[0];
+
     private LineRenderer middle = null;
     private LineRenderer top = null;
     private LineRenderer bottom = null;
@@ -22,6 +25,8 @@ public class NuRiver : MonoBehaviour
 
     private MeshFilter waterFilter = null;
     private MeshRenderer waterRenderer = null;
+
+    private List<GameObject> landscape = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -83,14 +88,14 @@ public class NuRiver : MonoBehaviour
         //Water Mesh
         waterFilter = gameObject.AddComponent<MeshFilter>();
         waterRenderer = gameObject.AddComponent<MeshRenderer>();
-        Material material = null;
-        waterRenderer.material = material;
+        waterRenderer.material = waterTexture[0];
         makeMesh(ref waterFilter, topEdge, bottomEdge);
     }
 
     public void moveRiver(Vector3 vec)
     {
         transform.position += vec;
+        moveLandscape(vec);
 
         while (transform.position.x <= -((segmentLength * numberOfSegments) / 2.0f) - segmentLength)
         {
@@ -110,6 +115,9 @@ public class NuRiver : MonoBehaviour
             copy(ref bottomEdge, bottom, true);
 
             makeMesh(ref waterFilter, topEdge, bottomEdge);
+
+            produceLandscape();
+            killLandscape();
         }
     }
 
@@ -252,23 +260,23 @@ public class NuRiver : MonoBehaviour
         }
 
         Vector2[] UV_MaterialDisplay = new Vector2[numOfEdgeSegments * 2];
-        for (int i = 0; i < numberOfSegments-1; i+=2)
+        for (int i = 0; i < numberOfSegments-1; ++i)
         {
             for (int j = 0; j < numberOfZetaSegments; ++j)
             {
-                UV_MaterialDisplay[(i * numberOfZetaSegments) + j] = new Vector2(((float)j)/((float)numberOfZetaSegments), 0);
-                UV_MaterialDisplay[(i * numberOfZetaSegments) + j + numOfEdgeSegments] = new Vector2(((float)j) / ((float)numberOfZetaSegments), 1);
+                UV_MaterialDisplay[(i * numberOfZetaSegments) + j] = new Vector2(((float)j)/((float)numberOfZetaSegments), 1);
+                UV_MaterialDisplay[(i * numberOfZetaSegments) + j + numOfEdgeSegments] = new Vector2(((float)j) / ((float)numberOfZetaSegments), 0);
             }
             
         }
-        for (int i = 1; i < numberOfSegments - 1; i += 2)
+        /*for (int i = 1; i < numberOfSegments - 1; i += 2)
         {
             for (int j = 0; j < numberOfZetaSegments; ++j)
             {
-                UV_MaterialDisplay[(i * numberOfZetaSegments) + j] = new Vector2(1.0f - (((float)j) / ((float)numberOfZetaSegments)), 0);
-                UV_MaterialDisplay[(i * numberOfZetaSegments) + j + numOfEdgeSegments] = new Vector2(1.0f - (((float)j) / ((float)numberOfZetaSegments)), 1);
+                UV_MaterialDisplay[(i * numberOfZetaSegments) + j] = new Vector2(1.0f - (((float)j) / ((float)numberOfZetaSegments)), 1);
+                UV_MaterialDisplay[(i * numberOfZetaSegments) + j + numOfEdgeSegments] = new Vector2(1.0f - (((float)j) / ((float)numberOfZetaSegments)), 0);
             }
-        }
+        }*/
 
             int[] Triangles = new int[((numOfEdgeSegments - 1) * 2) * 3];
         for (int i = 0; i < numOfEdgeSegments - 1; ++i)
@@ -385,5 +393,68 @@ public class NuRiver : MonoBehaviour
 
             return 1;
         }
+    }
+
+    private void Update()
+    {
+        float maxT = 1.0f;
+        float t = Mathf.Repeat(Time.time, maxT);
+
+        if (t < maxT / 3.0f)
+            waterRenderer.material = waterTexture[0];
+        else if (t < (2.0f * maxT) / 3.0f)
+            waterRenderer.material = waterTexture[1];
+        else
+            waterRenderer.material = waterTexture[2];
+    }
+
+    private void moveLandscape(Vector3 vec)
+    {
+        foreach (GameObject g in landscape)
+        {
+            g.transform.position += vec;
+        }
+    }
+
+    private void produceLandscape()
+    {
+        int numToCreate = Random.Range(5, 21);
+
+        for (int i = 0; i < numToCreate; ++i)
+        {
+            int whichZeta = Random.Range(0, numberOfZetaSegments);
+
+            if (Random.Range(0, 2) == 0)
+            {
+                landscape.Add(Instantiate(
+                        treesNcrap[Random.Range(0, treesNcrap.Length)],
+                        bottomEdge.points[((numberOfSegments - 2) * numberOfZetaSegments) + whichZeta] +
+                        new Vector2(transform.position.x, transform.position.y) -
+                        (((Vector2)(Vector3.Cross(Vector3.forward, middle.GetPosition(numberOfSegments - 1) - middle.GetPosition(numberOfSegments - 2)).normalized) * Random.Range(0.1f, 3.0f))),
+                        Quaternion.identity,
+                        null));
+
+                Vector3 whereWeAt = landscape[landscape.Count - 1].transform.position;
+                landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, whereWeAt.y);
+            }
+            else
+            {
+                landscape.Add(Instantiate(
+                    treesNcrap[Random.Range(0, treesNcrap.Length)],
+                    topEdge.points[((numberOfSegments - 2) * numberOfZetaSegments) + whichZeta] +
+                    new Vector2(transform.position.x, transform.position.y) +
+                    (((Vector2)(Vector3.Cross(Vector3.forward, middle.GetPosition(numberOfSegments - 1) - middle.GetPosition(numberOfSegments - 2)).normalized) * Random.Range(0.1f, 3.0f))),
+                    Quaternion.identity,
+                    null));
+
+                Vector3 whereWeAt = landscape[landscape.Count - 1].transform.position;
+                landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, whereWeAt.y);
+            }
+        }
+    }
+
+    private void killLandscape()
+    {
+
     }
 }

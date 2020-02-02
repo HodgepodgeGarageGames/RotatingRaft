@@ -9,59 +9,78 @@ public static class SNES
         private string horizontal;
         private string vertical;
         private string a;
+        private string start;
+        private string select;
 
-        public GamePad(string H, string V, string A)
+        public GamePad(string H, string V, string A, string START, string SELECT)
         {
             horizontal = H;
             vertical = V;
             a = A;
+            start = START;
+            select = SELECT;
         }
 
         public float Horizontal()
         {
-            if (Input.GetAxis(horizontal) > 0.0f)
-                Debug.Log(horizontal);
-
             return Input.GetAxis(horizontal);
         }
 
         public float Vertical()
         {
-            if (Input.GetAxis(vertical) > 0.0f)
-                Debug.Log(vertical);
-
             return Input.GetAxis(vertical);
         }
 
         public bool A()
         {
-            if (Input.GetButton(a))
-                Debug.Log(a);
-
-            return Input.GetButton(a);
+           return Input.GetButton(a);
         }
 
         public bool ADown()
         {
-            if (Input.GetButtonDown(a))
-                Debug.Log(a + " down");
-
             return Input.GetButtonDown(a);
         }
 
         public bool AUp()
         {
-            if (Input.GetButtonUp(a))
-                Debug.Log(a + " up");
-
             return Input.GetButtonUp(a);
+        }
+
+        public bool Start()
+        {
+            return Input.GetButton(start);
+        }
+
+        public bool StartDown()
+        {
+            return Input.GetButtonDown(start);
+        }
+
+        public bool StartUp()
+        {
+            return Input.GetButtonUp(start);
+        }
+
+        public bool Select()
+        {
+            return Input.GetButton(select);
+        }
+
+        public bool SelectDown()
+        {
+            return Input.GetButtonDown(select);
+        }
+
+        public bool SelecttUp()
+        {
+            return Input.GetButtonUp(select);
         }
     }
 
     public static GamePad[] gamePad = {
-        new GamePad("P1Horizontal", "P1Vertical", "P1A"),
-        new GamePad("P2Horizontal", "P2Vertical", "P2A"),
-        new GamePad("P3Horizontal", "P3Vertical", "P3A"),
-        new GamePad("P4Horizontal", "P4Vertical", "P4A")
+        new GamePad("P1Horizontal", "P1Vertical", "P1A", "P1Start", "P1Select"),
+        new GamePad("P2Horizontal", "P2Vertical", "P2A", "P2Start", "P2Select"),
+        new GamePad("P3Horizontal", "P3Vertical", "P3A", "P3Start", "P3Select"),
+        new GamePad("P4Horizontal", "P4Vertical", "P4A", "P4Start", "P4Select")
     };
 }
