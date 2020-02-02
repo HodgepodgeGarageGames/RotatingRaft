@@ -13,6 +13,7 @@ public class NuRiver : MonoBehaviour
     [SerializeField] private int numberOfZetaSegments = 2;
     [SerializeField] private Material[] waterTexture = new Material[3];
     [SerializeField] private GameObject[] treesNcrap = new GameObject[0];
+    [SerializeField] private float riverThrust = 0.1f;
 
     private LineRenderer middle = null;
     private LineRenderer top = null;
@@ -28,11 +29,7 @@ public class NuRiver : MonoBehaviour
 
     private List<GameObject> landscape = new List<GameObject>();
 
-    private Vector3 vel = Vector3.zero;
-
     private Rigidbody2D rb2d = null;
-
-    private Vector2 riverOldPos;
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +37,6 @@ public class NuRiver : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         widthMod = widthMax;
-
-        riverOldPos = rb2d.position;
 
         //Line renderer
         GameObject middleGO = new GameObject("Middle Line");
@@ -94,7 +89,7 @@ public class NuRiver : MonoBehaviour
 
         //Stuff
         rb2d.MovePosition(Vector3.left * ((float)numberOfSegments) / 2.0f * segmentLength);
-        //moveRiver(Vector3.left * ((float)numberOfSegments) / 2.0f * segmentLength);
+        rb2d.velocity = Vector2.left * 40.0f;
 
         //Water Mesh
         waterFilter = gameObject.AddComponent<MeshFilter>();
@@ -105,13 +100,15 @@ public class NuRiver : MonoBehaviour
 
     public void moveRiver(Vector3 vec)
     {
-        moveLandscape(rb2d.position - riverOldPos);
-        riverOldPos = rb2d.position;
-
         rb2d.AddForce(vec);
 
         while (transform.position.x <= -((segmentLength * numberOfSegments) / 2.0f) - segmentLength)
         {
+            foreach (GameObject g in landscape)
+            {
+                g.transform.position -= Vector3.right * segmentLength;
+            }
+
             //Line renderer
             transform.position += Vector3.right * segmentLength;
 
@@ -269,18 +266,18 @@ public class NuRiver : MonoBehaviour
         {
             Vertex[i] = eTop.points[i];
             Vertex[i + numOfEdgeSegments] = eBottom.points[i];
-            
+
         }
 
         Vector2[] UV_MaterialDisplay = new Vector2[numOfEdgeSegments * 2];
-        for (int i = 0; i < numberOfSegments-1; ++i)
+        for (int i = 0; i < numberOfSegments - 1; ++i)
         {
             for (int j = 0; j < numberOfZetaSegments; ++j)
             {
-                UV_MaterialDisplay[(i * numberOfZetaSegments) + j] = new Vector2(((float)j)/((float)numberOfZetaSegments), 1);
+                UV_MaterialDisplay[(i * numberOfZetaSegments) + j] = new Vector2(((float)j) / ((float)numberOfZetaSegments), 1);
                 UV_MaterialDisplay[(i * numberOfZetaSegments) + j + numOfEdgeSegments] = new Vector2(((float)j) / ((float)numberOfZetaSegments), 0);
             }
-            
+
         }
         /*for (int i = 1; i < numberOfSegments - 1; i += 2)
         {
@@ -291,7 +288,7 @@ public class NuRiver : MonoBehaviour
             }
         }*/
 
-            int[] Triangles = new int[((numOfEdgeSegments - 1) * 2) * 3];
+        int[] Triangles = new int[((numOfEdgeSegments - 1) * 2) * 3];
         for (int i = 0; i < numOfEdgeSegments - 1; ++i)
         {
             Triangles[(i * 6) + 0] = i + 0;
@@ -424,19 +421,7 @@ public class NuRiver : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Raft movement
-        vel -= Vector3.right * Time.fixedDeltaTime * 0.1f;
-        //vel *= 0.98f;
-
-        moveRiver(vel);
-    }
-
-    private void moveLandscape(Vector3 vec)
-    {
-        foreach (GameObject g in landscape)
-        {
-            g.transform.position += vec;
-        }
+        moveRiver(-Vector3.right * Time.fixedDeltaTime * riverThrust);
     }
 
     private void produceLandscape()
@@ -455,7 +440,7 @@ public class NuRiver : MonoBehaviour
                         new Vector2(transform.position.x, transform.position.y) -
                         (((Vector2)(Vector3.Cross(Vector3.forward, middle.GetPosition(numberOfSegments - 1) - middle.GetPosition(numberOfSegments - 2)).normalized) * Random.Range(0.1f, 3.0f))),
                         Quaternion.identity,
-                        null));
+                        transform));
 
                 Vector3 whereWeAt = landscape[landscape.Count - 1].transform.position;
                 landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, whereWeAt.y);
@@ -468,7 +453,7 @@ public class NuRiver : MonoBehaviour
                     new Vector2(transform.position.x, transform.position.y) +
                     (((Vector2)(Vector3.Cross(Vector3.forward, middle.GetPosition(numberOfSegments - 1) - middle.GetPosition(numberOfSegments - 2)).normalized) * Random.Range(0.1f, 3.0f))),
                     Quaternion.identity,
-                    null));
+                    transform));
 
                 Vector3 whereWeAt = landscape[landscape.Count - 1].transform.position;
                 landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, whereWeAt.y);

@@ -99,4 +99,8 @@ public class PlayerBehavior : MonoBehaviour
             );
         }
     }
+
+    public void OnMotorStay(MotorBehavior motor) {
+        if (input.a) motor.Thrust();
+    }
 }

@@ -18,6 +18,6 @@ public class RaftBehavior : MonoBehaviour
 
     void OnCollisionEnter2D()
     {
-        Debug.Log("Entered");
+        //Debug.Log("Entered");
     }
 }
