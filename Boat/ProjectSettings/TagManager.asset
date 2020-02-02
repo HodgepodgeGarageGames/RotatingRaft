@@ -44,6 +44,9 @@ TagManager:
   - name: Raft
     uniqueID: 412419029
     locked: 0
+  - name: Damage Tiles
+    uniqueID: 3029958547
+    locked: 0
   - name: Players
     uniqueID: 3808618015
     locked: 0
