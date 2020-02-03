@@ -9,6 +9,7 @@ public class DamageGridBehavior : MonoBehaviour
     public int gridWidth = 16;
     public int gridHeight = 16;
     public float gridSpacing = 0.32f;
+    public GameObject   gameOverObject;
     Transform[,] tileGrid;
     // Start is called before the first frame update
     void Start()
@@ -79,16 +80,21 @@ public class DamageGridBehavior : MonoBehaviour
 
     public void IncurDamage()
     {
-        int remain = numberOfTilesToDamage;
+        int breakNum = numberOfTilesToDamage;
 
         List<Transform> undamaged = FindUndamagedTiles();
         undamaged = Shuffle(undamaged);
 
         int count = undamaged.Count;
-        for (int i=0; i < remain && i < count; ++i) {
+        for (int i=0; i < breakNum && i < count; ++i) {
             undamaged[0].gameObject.SetActive(true);
             undamaged.RemoveAt(0);
         }
+
+        if (count - breakNum < tileGrid.Length/2) {
+            gameOverObject.SetActive(true);
+        }
+
     }
 
     public List<Transform> FindUndamagedTiles()
