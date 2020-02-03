@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/RiverTest.unity
-    guid: 72937120d07e07c48ab01e8059371e50
+    path: Assets/Scenes/BumperScreen.unity
+    guid: 45612846c0d1daa4fad9fcf72325593d
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: 585e1cc2b34185d489203a3853712aeb
   - enabled: 1
-    path: Assets/Scenes/BumperScreen.unity
-    guid: 45612846c0d1daa4fad9fcf72325593d
+    path: Assets/Scenes/RiverTest.unity
+    guid: 72937120d07e07c48ab01e8059371e50
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

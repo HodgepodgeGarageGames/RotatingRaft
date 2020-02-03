@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayersAssemblyBehavior : MonoBehaviour
 {
-    public GameObject               playerPrefab;
+    public GameObject piratePrefab;
+    public GameObject sailorPrefab;
+    public GameObject vikingPrefab;
+    public GameObject mermanPrefab;
+
     private List<Transform>         players = new List<Transform>();
     public float                    playerMaxSpeed = 1f;
     public float                    playerAcceleration = 1f; // secs per sec
@@ -14,14 +18,21 @@ public class PlayersAssemblyBehavior : MonoBehaviour
     void Start()
     {
         // Create players
-        var obj = Instantiate(playerPrefab, new Vector3(-1,0,0), Quaternion.identity, transform);
+        var obj = Instantiate(piratePrefab, new Vector3(-1.5f,0,0), Quaternion.identity, transform);
         players.Add(obj.transform);
-    }
+        obj.SetActive(GlobalGameData.playersIn[0]);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        obj = Instantiate(vikingPrefab, new Vector3(-0.5f, 0, 0), Quaternion.identity, transform);
+        players.Add(obj.transform);
+        obj.SetActive(GlobalGameData.playersIn[1]);
+
+        obj = Instantiate(sailorPrefab, new Vector3(0.5f, 0, 0), Quaternion.identity, transform);
+        players.Add(obj.transform);
+        obj.SetActive(GlobalGameData.playersIn[2]);
+
+        obj = Instantiate(mermanPrefab, new Vector3(1.5f, 0, 0), Quaternion.identity, transform);
+        players.Add(obj.transform);
+        obj.SetActive(GlobalGameData.playersIn[3]);
     }
 
     public void Straighten()

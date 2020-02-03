@@ -25,6 +25,7 @@ public class AButton : MonoBehaviour
             {
                 checkedIn = true;
                 image.gameObject.SetActive(false);
+                GlobalGameData.playersIn[playerNumber] = true;
             }
         }
         else
@@ -33,6 +34,7 @@ public class AButton : MonoBehaviour
             {
                 checkedIn = false;
                 image.gameObject.SetActive(true);
+                GlobalGameData.playersIn[playerNumber] = false;
             }
         }
         

@@ -6,6 +6,8 @@ public class PlayerBehavior : MonoBehaviour
 {
     Rigidbody2D body;
     private PlayerInput.PlayerInputReceiver input;
+    private Animator anim = null;
+
     public float       accel {
         get { return GetComponentInParent<PlayersAssemblyBehavior>().playerAcceleration; }
     }
@@ -19,10 +21,11 @@ public class PlayerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector2(-1,0);
         body = GetComponent<Rigidbody2D>();
         var p = GetComponentInParent<PlayersAssemblyBehavior>();
         input = PlayerInput.GetInputReceiver(p.GetPlayerIndex(transform));
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,8 +34,26 @@ public class PlayerBehavior : MonoBehaviour
         Friction();
         HandleControls();
 
-        var anim = GetComponent<Animator>();
-        anim.SetFloat("speed",body.velocity.sqrMagnitude);
+        if (body.velocity.magnitude > 0.02f)
+        {
+            Vector2 vel = body.velocity.normalized;
+            if (Mathf.Abs(vel.x) >= Mathf.Abs(vel.y))
+            {
+                if (vel.x > 0)
+                    anim.SetInteger("Direction", 4);
+                else
+                    anim.SetInteger("Direction", 3);
+            }
+            else
+            {
+                if (vel.y > 0)
+                    anim.SetInteger("Direction", 1);
+                else
+                    anim.SetInteger("Direction", 2);
+            }
+        }
+        else
+            anim.SetInteger("Direction", 0);
     }
 
     void HandleControls() {
@@ -48,14 +69,10 @@ public class PlayerBehavior : MonoBehaviour
         if (input.right) {
             ++x;
             Vector3 ov = transform.localScale;
-            // Point sprite leftwards
-            transform.localScale = new Vector3(Mathf.Abs(ov.x), ov.y, ov.z);
         }
         if (input.left) {
             --x;
             Vector3 ov = transform.localScale;
-            // Point sprite rightwards
-            transform.localScale = new Vector3(-Mathf.Abs(ov.x), ov.y, ov.z);
         }
         if (input.down)
             --y;
