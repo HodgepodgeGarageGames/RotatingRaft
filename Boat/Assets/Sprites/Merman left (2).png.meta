@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -6128109282131806682
     second: Merman left (2)_3
+  - first:
+      213: -9005724407810558799
+    second: Merman left (2)_0
+  - first:
+      213: -1393848241983435114
+    second: Merman left (2)_1
+  - first:
+      213: 2633497180645583703
+    second: Merman left (2)_2
+  - first:
+      213: -2387253169650470884
+    second: Merman left (2)_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -101,19 +113,19 @@ TextureImporter:
       name: Merman left (2)_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 0
-        width: 41
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a1284b630a2a1010800000000000000
-      internalID: 1160286048174481830
+      spriteID: 1b4f26f8d5d350380800000000000000
+      internalID: -9005724407810558799
       vertices: []
       indices: 
       edges: []
@@ -122,19 +134,19 @@ TextureImporter:
       name: Merman left (2)_1
       rect:
         serializedVersion: 2
-        x: 53
-        y: 2
-        width: 41
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 48
+        y: 0
+        width: 48
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 092344c3bd2bd3b90800000000000000
-      internalID: -7260450369572687216
+      spriteID: 69e46c9a86e08ace0800000000000000
+      internalID: -1393848241983435114
       vertices: []
       indices: 
       edges: []
@@ -143,19 +155,19 @@ TextureImporter:
       name: Merman left (2)_2
       rect:
         serializedVersion: 2
-        x: 101
+        x: 96
         y: 0
-        width: 41
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 48
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61cdd8a340fddcde0800000000000000
-      internalID: -1311146707239707626
+      spriteID: 75b6f51abbf0c8420800000000000000
+      internalID: 2633497180645583703
       vertices: []
       indices: 
       edges: []
@@ -164,19 +176,19 @@ TextureImporter:
       name: Merman left (2)_3
       rect:
         serializedVersion: 2
-        x: 149
-        y: 2
-        width: 41
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 144
+        y: 0
+        width: 48
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62672c5731594faa0800000000000000
-      internalID: -6128109282131806682
+      spriteID: c10fe02f3e5ceded0800000000000000
+      internalID: -2387253169650470884
       vertices: []
       indices: 
       edges: []
