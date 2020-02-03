@@ -12,6 +12,7 @@ public class MotorsAssemblyBehavior : MonoBehaviour
     public float        periodBetweenShifts = 8f;
 
     private float       remainingStateTime;
+    private float       stateChangeTimestamp;
     public enum SelectState {
         GRACE = 0,
         SHIFTING = 1,
@@ -62,7 +63,12 @@ public class MotorsAssemblyBehavior : MonoBehaviour
         SetTimeForState();
     }
 
+    private float GetTimeForState(SelectState s) {
+        return stateTimeLookup[(int)s]();
+    }
+
     private void SetTimeForState() {
+        stateChangeTimestamp = Time.fixedTime;
         remainingStateTime = stateTimeLookup[(int)currentState]();
     }
 
@@ -81,11 +87,37 @@ public class MotorsAssemblyBehavior : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (currentState == SelectState.SHIFTING) {
+            StrobeShift();
+        }
+    }
+
+    void StrobeShift()
+    {
+        // How much of the way through shifting are we?
+        float timeElapsed = Time.fixedTime - stateChangeTimestamp;
+        float fraction = timeElapsed/GetTimeForState(currentState);
+        const float NUM_PERIODS = 4;
+        // Used to strobe colors on players and motor:
+        float strobe = 1 + (Mathf.Cos(fraction*Mathf.PI*NUM_PERIODS))/2;
+
+        // Strobe the motors
+        if (false) {
+            var red = new Color(strobe, strobe, 1); /* rgb */
+            foreach (var m in motors) {
+                var sprite = m.GetComponent<SpriteRenderer>();
+                sprite.color = red;
+            }
+        }
+    }
+
     void EnterShiftingState() {
-        Debug.Log("Entered shifting state");
+
     }
 
     void EnterSelectedState() {
-        Debug.Log("Entered selected state");
+
     }
 }
