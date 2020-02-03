@@ -7,6 +7,7 @@ public class PlayerBehavior : MonoBehaviour
     Rigidbody2D body;
     private PlayerInput.PlayerInputReceiver input;
     private Animator anim = null;
+    private PlayersAssemblyBehavior p = null;
 
     public float       accel {
         get { return GetComponentInParent<PlayersAssemblyBehavior>().playerAcceleration; }
@@ -22,7 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        var p = GetComponentInParent<PlayersAssemblyBehavior>();
+        p = GetComponentInParent<PlayersAssemblyBehavior>();
         input = PlayerInput.GetInputReceiver(p.GetPlayerIndex(transform));
 
         anim = GetComponent<Animator>();
@@ -118,6 +119,15 @@ public class PlayerBehavior : MonoBehaviour
     }
 
     public void OnMotorStay(MotorBehavior motor) {
+        if (SNES.gamePad[p.GetPlayerIndex(transform)].ADown())
+        {
+            motor.RevUp();
+        }
+        else if (SNES.gamePad[p.GetPlayerIndex(transform)].AUp())
+        {
+            motor.RevDown();
+        }
+
         if (input.a) motor.Thrust();
     }
 }

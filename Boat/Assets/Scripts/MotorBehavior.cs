@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MotorBehavior : MonoBehaviour
 {
+    private AudioSource audioSource = null;
+
     public float thrust {
         get {
             // Assumes parent is a MotorsAssembly
@@ -14,7 +16,7 @@ public class MotorBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,5 +44,17 @@ public class MotorBehavior : MonoBehaviour
         var vec3 = transform.TransformDirection(0,Time.fixedDeltaTime*thrust,0);
         var vec = new Vector2(vec3.x,vec3.y);
         rb2d.AddForce(vec);
+    }
+
+    public void RevUp()
+    {
+        audioSource.volume = 1.0f;
+        audioSource.pitch = 1.06f;
+    }
+
+    public void RevDown()
+    {
+        audioSource.volume = 0.2f;
+        audioSource.pitch = 1.2f;
     }
 }
