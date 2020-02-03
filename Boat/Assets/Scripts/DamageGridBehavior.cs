@@ -6,10 +6,13 @@ public class DamageGridBehavior : MonoBehaviour
 {
     public GameObject   tileObject;
     public int numberOfTilesToDamage = 5;
+    public float fractionToDie = 0.33f;
+    public float redamageGraceSecs = 1;
     public int gridWidth = 16;
     public int gridHeight = 16;
     public float gridSpacing = 0.32f;
     public GameObject   gameOverObject;
+    private float lastDamageTime = 0;
     Transform[,] tileGrid;
     // Start is called before the first frame update
     void Start()
@@ -80,6 +83,12 @@ public class DamageGridBehavior : MonoBehaviour
 
     public void IncurDamage()
     {
+        if (Time.fixedTime - lastDamageTime < redamageGraceSecs) {
+            Debug.Log("Not damaging due to grace period");
+            return;
+        }
+        lastDamageTime = Time.fixedTime;
+
         int breakNum = numberOfTilesToDamage;
 
         List<Transform> undamaged = FindUndamagedTiles();
@@ -91,7 +100,7 @@ public class DamageGridBehavior : MonoBehaviour
             undamaged.RemoveAt(0);
         }
 
-        if (count - breakNum < tileGrid.Length/2) {
+        if (count - breakNum < tileGrid.Length*fractionToDie) {
             gameOverObject.SetActive(true);
         }
 
