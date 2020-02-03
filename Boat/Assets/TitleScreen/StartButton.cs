@@ -17,14 +17,14 @@ public class StartButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (abuttons[0].checkedIn || abuttons[1].checkedIn || abuttons[2].checkedIn || abuttons[3].checkedIn)
+        if (GlobalGameData.playersIn[0] || GlobalGameData.playersIn[1] || GlobalGameData.playersIn[2] || GlobalGameData.playersIn[3])
         {
             image.gameObject.SetActive(true);
             image.localScale = Vector3.one * (0.9f + (Mathf.Sin(Time.time * 1.0f) * 0.1f));
 
             for (int i = 0; i < 4; ++i)
             {
-                if (abuttons[i].checkedIn)
+                if (GlobalGameData.playersIn[i])
                 {
                     if (SNES.gamePad[i].StartDown())
                     {
