@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
     [SerializeField] private Transform image = null;
-    [SerializeField] private AButton[] abuttons = new AButton[4];
+    [SerializeField] private TitleScreen titleScreen = null;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +27,7 @@ public class StartButton : MonoBehaviour
                 {
                     if (SNES.gamePad[i].StartDown())
                     {
-                        SceneManager.LoadScene("RiverTest", LoadSceneMode.Single);
+                        titleScreen.GetGameStarted();
                     }
                 }
             }
@@ -36,4 +35,6 @@ public class StartButton : MonoBehaviour
         else
             image.gameObject.SetActive(false);
     }
+
+    
 }

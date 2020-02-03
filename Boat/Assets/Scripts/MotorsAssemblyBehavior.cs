@@ -104,13 +104,13 @@ public class MotorsAssemblyBehavior : MonoBehaviour
         float strobe = 1 + (Mathf.Cos(fraction*Mathf.PI*NUM_PERIODS))/2;
 
         // Strobe the motors
-        if (false) {
-            var red = new Color(strobe, strobe, 1); /* rgb */
+        /*if (false) {
+            var red = new Color(strobe, strobe, 1); // rgb
             foreach (var m in motors) {
                 var sprite = m.GetComponent<SpriteRenderer>();
                 sprite.color = red;
             }
-        }
+        }*/
     }
 
     void EnterShiftingState() {
