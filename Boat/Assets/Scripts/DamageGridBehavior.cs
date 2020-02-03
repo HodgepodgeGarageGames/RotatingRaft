@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageGridBehavior : MonoBehaviour
 {
     public GameObject   tileObject;
+    public int numberOfTilesToDamage = 5;
     public int gridWidth = 16;
     public int gridHeight = 16;
     public float gridSpacing = 0.32f;
@@ -74,5 +75,41 @@ public class DamageGridBehavior : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void IncurDamage()
+    {
+        int remain = numberOfTilesToDamage;
+
+        List<Transform> undamaged = FindUndamagedTiles();
+        undamaged = Shuffle(undamaged);
+
+        int count = undamaged.Count;
+        for (int i=0; i < remain && i < count; ++i) {
+            undamaged[0].gameObject.SetActive(true);
+            undamaged.RemoveAt(0);
+        }
+    }
+
+    public List<Transform> FindUndamagedTiles()
+    {
+        var list = new List<Transform>();
+        foreach (Transform t in tileGrid) {
+            if (!t.gameObject.activeSelf) list.Add(t);
+        }
+        return list;
+    }
+
+    public List<Transform> Shuffle(List<Transform> l)
+    {
+        var ret = new List<Transform>();
+        int count = l.Count;
+        while (count-- != 0) {
+            int rand = (int)(Random.value*count);
+            ret.Add(l[rand]);
+            l.RemoveAt(rand);
+        }
+
+        return ret;
     }
 }

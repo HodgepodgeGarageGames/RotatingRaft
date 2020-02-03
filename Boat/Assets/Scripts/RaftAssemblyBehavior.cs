@@ -28,4 +28,19 @@ public class RaftAssemblyBehavior : MonoBehaviour
         players.Straighten();
         players.RotateBy(rot);
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("TRIGGERED");
+        if (IsRiverCollider(col)) {
+            var b = GetComponentInChildren<DamageGridBehavior>();
+            b.IncurDamage();
+        }
+    }
+
+    bool IsRiverCollider(Collider2D col)
+    {
+        return typeof(EdgeCollider2D).IsInstanceOfType(col)
+            && col.GetComponentInParent<NuRiver>() != null;
+    }
 }
