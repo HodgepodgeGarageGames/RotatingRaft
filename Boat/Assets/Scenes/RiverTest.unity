@@ -172,11 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4373a54d1246cd74c87a4b6fbdb5837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  widthMax: 6
-  widthMin: 4
-  bendRange: 8
-  zetaRange: 0.6
-  segmentLength: 12
+  widthMax: 8
+  widthMin: 5
+  bendRange: 12
+  zetaRange: 0.9
+  segmentLength: 36
   numberOfSegments: 10
   numberOfZetaSegments: 3
   waterTexture:
@@ -188,7 +188,7 @@ MonoBehaviour:
   - {fileID: 4628208302236697721, guid: de5836a984fab1d4ab858e118380f0df, type: 3}
   - {fileID: 516009352603541895, guid: 71d6ba1200efcdf449a0df45d28a438e, type: 3}
   - {fileID: 1103564047492089139, guid: 30616fc135318bf4093e7a439a58fdfa, type: 3}
-  riverThrust: 4
+  riverThrust: 3
 --- !u!4 &499815910
 Transform:
   m_ObjectHideFlags: 0
