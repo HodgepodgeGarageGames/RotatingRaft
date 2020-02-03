@@ -45,6 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motor: {fileID: 8353439831774208061, guid: 1aa018fc999639545932595aea06a64d, type: 3}
   thrust: 12
+  numPlayers: 0
+  startupGraceTime: 5
+  shiftingPeriod: 4
+  periodBetweenShifts: 8
 --- !u!1 &3933474175208150488
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +60,8 @@ GameObject:
   - component: {fileID: 3933474175208150490}
   - component: {fileID: 3933474175208150489}
   - component: {fileID: 3933474175208150491}
-  m_Layer: 0
+  - component: {fileID: 1246118648}
+  m_Layer: 8
   m_Name: RaftAssembly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +109,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 3933474175208150488}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -115,6 +120,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &1246118648
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933474175208150488}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.2, y: 5.2}
+  m_EdgeRadius: 0
 --- !u!1 &3933474175447313911
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileObject: {fileID: 5066244334932110643, guid: faf028056bf59394cb995098168e3596,
     type: 3}
+  numberOfTilesToDamage: 5
   gridWidth: 16
   gridHeight: 16
   gridSpacing: 0.32
@@ -344,7 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49266bda2bf4c2b44831e03caa2ea402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8270280168005459394, guid: 524b9c02c025eea41b3303b5dfed4a5b,
+  piratePrefab: {fileID: 8270280168005459394, guid: 8b0d464fed4b52c4a8c24be30a3659ff,
+    type: 3}
+  sailorPrefab: {fileID: 8270280168005459394, guid: 0f47ef8247c5ace418cada1a8807e645,
+    type: 3}
+  vikingPrefab: {fileID: 8270280168005459394, guid: be86b7d0fc1472c4fa42f2bd7cb722a0,
+    type: 3}
+  mermanPrefab: {fileID: 8270280168005459394, guid: ef43296382c71604aab9fa27fe8bcdad,
     type: 3}
   playerMaxSpeed: 2
   playerAcceleration: 32
