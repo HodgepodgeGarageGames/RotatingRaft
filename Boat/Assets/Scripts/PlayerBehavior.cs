@@ -119,15 +119,14 @@ public class PlayerBehavior : MonoBehaviour
     }
 
     public void OnMotorStay(MotorBehavior motor) {
-        if (SNES.gamePad[p.GetPlayerIndex(transform)].ADown())
+        if (input.a)
         {
             motor.RevUp();
+            motor.Thrust();
         }
-        else if (SNES.gamePad[p.GetPlayerIndex(transform)].AUp())
+        else
         {
             motor.RevDown();
         }
-
-        if (input.a) motor.Thrust();
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MotorBehavior : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem smoke = null;
+
     private AudioSource audioSource = null;
 
     public float thrust {
@@ -50,11 +52,25 @@ public class MotorBehavior : MonoBehaviour
     {
         audioSource.volume = 1.0f;
         audioSource.pitch = 1.06f;
+
+        var em = smoke.emission;
+        em.rateOverTime = 60.0f;
+
+        var mn = smoke.main;
+        mn.startSpeed = 2;
+        mn.startLifetime = 2.0f;
     }
 
     public void RevDown()
     {
         audioSource.volume = 0.2f;
-        audioSource.pitch = 1.2f;
+        audioSource.pitch = 1.0f;
+
+        var em = smoke.emission;
+        em.rateOverTime = 20.0f;
+
+        var mn = smoke.main;
+        mn.startSpeed = 0.5f;
+        mn.startLifetime = 1.0f;
     }
 }
