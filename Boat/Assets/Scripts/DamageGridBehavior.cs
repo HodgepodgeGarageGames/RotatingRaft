@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DamageGridBehavior : MonoBehaviour
 {
@@ -100,10 +101,19 @@ public class DamageGridBehavior : MonoBehaviour
             undamaged.RemoveAt(0);
         }
 
-        if (count - breakNum < tileGrid.Length*fractionToDie) {
-            gameOverObject.SetActive(true);
+        if (count - breakNum < tileGrid.Length*(1-fractionToDie)) {
+            StartCoroutine(gameover());
         }
 
+    }
+
+    public IEnumerator gameover()
+    {
+        gameOverObject.SetActive(true);
+
+        yield return new WaitForSeconds(3.0f);
+
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
     }
 
     public List<Transform> FindUndamagedTiles()

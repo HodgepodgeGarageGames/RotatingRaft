@@ -22,9 +22,9 @@ public class Repair : MonoBehaviour
     {
         if (SNES.gamePad[pab.GetPlayerIndex(transform)].BDown())
         {
-            damagedTile = damageGrid.getClosestDamagedTile(transform.position, 0.7f);
+            damagedTile = damageGrid.getClosestDamagedTile(transform.position, 1.0f);
 
-            timeUntilRepair = 1.0f;
+            timeUntilRepair = 0.6f;
         }
 
         if (SNES.gamePad[pab.GetPlayerIndex(transform)].B())

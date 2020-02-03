@@ -29,5 +29,8 @@ public class TitleScreen : MonoBehaviour
         {
             instructions.SetActive(false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 }
