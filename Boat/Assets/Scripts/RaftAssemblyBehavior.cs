@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class RaftAssemblyBehavior : MonoBehaviour
 {
-    public float            angularVelocity = 30;
+    public float            minAngularVelocity = 8;  // 1 player
+    public float            maxAngularVelocity = 20; // 4 players
+    private float           angularVelocity = 20;
     private Rigidbody2D     raftBody;
     PlayersAssemblyBehavior players;
 
@@ -17,6 +19,10 @@ public class RaftAssemblyBehavior : MonoBehaviour
         //raftBody.angularDrag = 0f;
 
         players = GetComponentInChildren<PlayersAssemblyBehavior>();
+
+        // Scale angularVelocity linearly from 8 (1 player) to 20 (4 playes)
+        angularVelocity = minAngularVelocity
+            + (GlobalGameData.numPlayers-1)*(maxAngularVelocity-minAngularVelocity)/3;
     }
 
     // Update is called once per frame

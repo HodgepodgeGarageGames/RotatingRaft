@@ -14,7 +14,9 @@ public class NuRiver : MonoBehaviour
     [SerializeField] private int numberOfZetaSegments = 2;
     [SerializeField] private Material[] waterTexture = new Material[3];
     [SerializeField] private GameObject[] treesNcrap = new GameObject[0];
-    [SerializeField] private float riverThrust = 0.1f;
+    [SerializeField] private float minRiverThrust = 1f;
+    [SerializeField] private float maxRiverThrust = 3f;
+    private float riverThrust;
     [SerializeField] private Text scoreText = null;
 
     private LineRenderer middle = null;
@@ -38,6 +40,9 @@ public class NuRiver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Scale riverThurst linearly from 1 (1 player) to 3 (4 players)
+        riverThrust = minRiverThrust + (GlobalGameData.numPlayers-1)*(maxRiverThrust-minRiverThrust)/3;
+
         rb2d = GetComponent<Rigidbody2D>();
 
         widthMod = widthMax;
