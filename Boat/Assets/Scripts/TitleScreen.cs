@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
     [SerializeField] private GameObject instructions = null;
+    [SerializeField] private GameObject startButton = null;
+    [SerializeField] private AButton[] abuttons = new AButton[4];
+    [SerializeField] private TitleToon[] toon = new TitleToon[4];
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +33,33 @@ public class TitleScreen : MonoBehaviour
         {
             instructions.SetActive(false);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
+
+    public void GetGameStarted()
+    {
+        StartCoroutine(getgamestarted());
+    }
+
+    private IEnumerator getgamestarted()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            abuttons[i].gameObject.SetActive(false);
+
+            if (toon[i].gameObject.activeSelf)
+            {
+                toon[i].GetComponent<Animator>().SetBool("Go", true);
+                toon[i].playStartSound();
+            }
+        }
+
+        startButton.SetActive(false);
+        
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene("RiverTest", LoadSceneMode.Single);
     }
 }

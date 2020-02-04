@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
     [SerializeField] private Transform image = null;
     [SerializeField] private AButton[] abuttons = new AButton[4];
+    [SerializeField] private TitleScreen titleScreen = null;
     private PlayerInput.PlayerInputReceiver[] playerInput = new PlayerInput.PlayerInputReceiver[4];
 
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class StartButton : MonoBehaviour
                 {
                     if (playerInput[i].startDown)
                     {
-                        SceneManager.LoadScene("RiverTest", LoadSceneMode.Single);
+                        titleScreen.GetGameStarted();
                     }
                 }
             }
@@ -39,4 +39,6 @@ public class StartButton : MonoBehaviour
         else
             image.gameObject.SetActive(false);
     }
+
+    
 }

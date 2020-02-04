@@ -6,14 +6,8 @@ public class AButton : MonoBehaviour
 {
     [SerializeField] private Transform image = null;
     [SerializeField] private int playerNumber = -1;
-    [SerializeField] private GameObject toon = null;
+    [SerializeField] private TitleToon toon = null;
     private PlayerInput.PlayerInputReceiver playerInput;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -33,7 +27,8 @@ public class AButton : MonoBehaviour
             {
                 GlobalGameData.playersIn[playerNumber] = true;
                 image.gameObject.SetActive(false);
-                toon.SetActive(true);
+                toon.gameObject.SetActive(true);
+                toon.playASound();
             }
         }
         else
@@ -42,7 +37,7 @@ public class AButton : MonoBehaviour
             {
                 GlobalGameData.playersIn[playerNumber] = false;
                 image.gameObject.SetActive(true);
-                toon.SetActive(false);
+                toon.gameObject.SetActive(false);
             }
         }
         

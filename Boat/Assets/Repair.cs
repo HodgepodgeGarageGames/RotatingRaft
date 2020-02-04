@@ -24,9 +24,9 @@ public class Repair : MonoBehaviour
     {
         if (playerInput.bDown)
         {
-            damagedTile = damageGrid.getClosestDamagedTile(transform.position, 0.7f);
+            damagedTile = damageGrid.getClosestDamagedTile(transform.position, 1.0f);
 
-            timeUntilRepair = 1.0f;
+            timeUntilRepair = 0.6f;
         }
 
         if (playerInput.b)

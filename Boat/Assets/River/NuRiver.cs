@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NuRiver : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class NuRiver : MonoBehaviour
     [SerializeField] private Material[] waterTexture = new Material[3];
     [SerializeField] private GameObject[] treesNcrap = new GameObject[0];
     [SerializeField] private float riverThrust = 0.1f;
+    [SerializeField] private Text scoreText = null;
 
     private LineRenderer middle = null;
     private LineRenderer top = null;
@@ -31,12 +33,16 @@ public class NuRiver : MonoBehaviour
 
     private Rigidbody2D rb2d = null;
 
+    private float startTime = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
 
         widthMod = widthMax;
+
+        startTime = Time.time;
 
         //Line renderer
         GameObject middleGO = new GameObject("Middle Line");
@@ -417,6 +423,11 @@ public class NuRiver : MonoBehaviour
             waterRenderer.material = waterTexture[1];
         else
             waterRenderer.material = waterTexture[2];
+
+        scoreText.text = "Score: " + Mathf.FloorToInt(Time.time - startTime);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 
     private void FixedUpdate()

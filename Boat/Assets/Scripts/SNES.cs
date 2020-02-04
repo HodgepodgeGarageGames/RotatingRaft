@@ -35,7 +35,8 @@ public static class SNES
 
         public bool A()
         {
-           return Input.GetButton(a);
+            
+            return Input.GetButton(a);
         }
 
         public bool ADown()
