@@ -138,7 +138,7 @@ public class PlayerInput
             new KeyMapping(Control.Right, KeyCode.D),
             new KeyMapping(Control.A, KeyCode.LeftControl),
             new KeyMapping(Control.B, KeyCode.LeftShift),
-            null,
+            new KeyMapping(Control.Start, KeyCode.Return),
             null
         }
     };
