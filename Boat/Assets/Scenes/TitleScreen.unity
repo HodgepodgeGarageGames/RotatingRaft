@@ -361,7 +361,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1823865314}
+  - {fileID: 1847930236}
   m_Father: {fileID: 1705692300}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71b9caade597514091d7e98704060c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1823865314}
+  image: {fileID: 1847930236}
   playerNumber: 0
   toon: {fileID: 1109387572}
 --- !u!1 &757289754
@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 1823865314}
   - component: {fileID: 1823865315}
   m_Layer: 0
-  m_Name: A-Button (0)
+  m_Name: A-Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1013,7 +1013,7 @@ Transform:
   m_LocalPosition: {x: -2, y: -3, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 675611013}
+  m_Father: {fileID: 1875880166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1823865315
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 1847930236}
   - component: {fileID: 1847930237}
   m_Layer: 0
-  m_Name: A-Button (1)
+  m_Name: A-Button (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1094,7 +1094,7 @@ Transform:
   m_LocalPosition: {x: -6, y: -3, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1875880166}
+  m_Father: {fileID: 675611013}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1847930237
@@ -1277,7 +1277,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1847930236}
+  - {fileID: 1823865314}
   m_Father: {fileID: 1705692300}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71b9caade597514091d7e98704060c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1847930236}
+  image: {fileID: 1823865314}
   playerNumber: 1
   toon: {fileID: 1997612536}
 --- !u!1 &1997612536

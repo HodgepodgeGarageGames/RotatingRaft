@@ -7,11 +7,14 @@ public class StartButton : MonoBehaviour
 {
     [SerializeField] private Transform image = null;
     [SerializeField] private AButton[] abuttons = new AButton[4];
+    private PlayerInput.PlayerInputReceiver[] playerInput = new PlayerInput.PlayerInputReceiver[4];
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i=0; i != 4; ++i) {
+            playerInput[i] = PlayerInput.GetInputReceiver(i);
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class StartButton : MonoBehaviour
             {
                 if (GlobalGameData.playersIn[i])
                 {
-                    if (SNES.gamePad[i].StartDown())
+                    if (playerInput[i].startDown)
                     {
                         SceneManager.LoadScene("RiverTest", LoadSceneMode.Single);
                     }

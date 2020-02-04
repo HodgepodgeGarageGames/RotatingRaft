@@ -8,6 +8,7 @@ public class Repair : MonoBehaviour
     private PlayersAssemblyBehavior pab = null;
     private Transform damagedTile = null;
     private float timeUntilRepair = 0.0f;
+    private PlayerInput.PlayerInputReceiver playerInput;
 
     // Start is called before the first frame update
     void Start()
@@ -15,19 +16,20 @@ public class Repair : MonoBehaviour
         damagedTile = null;
         pab = transform.parent.GetComponent<PlayersAssemblyBehavior>();
         damageGrid = transform.parent.parent.GetComponentInChildren<DamageGridBehavior>();
+        playerInput = PlayerInput.GetInputReceiver(pab.GetPlayerIndex(transform));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SNES.gamePad[pab.GetPlayerIndex(transform)].BDown())
+        if (playerInput.bDown)
         {
             damagedTile = damageGrid.getClosestDamagedTile(transform.position, 0.7f);
 
             timeUntilRepair = 1.0f;
         }
 
-        if (SNES.gamePad[pab.GetPlayerIndex(transform)].B())
+        if (playerInput.b)
         {
             if (damagedTile)
             {
