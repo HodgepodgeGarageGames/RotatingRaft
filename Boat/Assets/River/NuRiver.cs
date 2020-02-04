@@ -101,6 +101,7 @@ public class NuRiver : MonoBehaviour
         waterFilter = gameObject.AddComponent<MeshFilter>();
         waterRenderer = gameObject.AddComponent<MeshRenderer>();
         waterRenderer.material = waterTexture[0];
+        waterRenderer.sortingOrder = -10;
         makeMesh(ref waterFilter, topEdge, bottomEdge);
     }
 
@@ -445,6 +446,8 @@ public class NuRiver : MonoBehaviour
 
             if (Random.Range(0, 2) == 0)
             {
+
+
                 landscape.Add(Instantiate(
                         treesNcrap[Random.Range(0, treesNcrap.Length)],
                         bottomEdge.points[((numberOfSegments - 2) * numberOfZetaSegments) + whichZeta] +
@@ -454,7 +457,8 @@ public class NuRiver : MonoBehaviour
                         transform));
 
                 Vector3 whereWeAt = landscape[landscape.Count - 1].transform.position;
-                landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, whereWeAt.y);
+                landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, 0.0f);
+                landscape[landscape.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = (int)(whereWeAt.y * 100000.0f);
             }
             else
             {
@@ -467,7 +471,8 @@ public class NuRiver : MonoBehaviour
                     transform));
 
                 Vector3 whereWeAt = landscape[landscape.Count - 1].transform.position;
-                landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, whereWeAt.y);
+                landscape[landscape.Count - 1].transform.position = new Vector3(whereWeAt.x, whereWeAt.y, 0.0f);
+                landscape[landscape.Count - 1].GetComponent<SpriteRenderer>().sortingOrder = ((int)whereWeAt.y) * 100000;
             }
         }
     }
