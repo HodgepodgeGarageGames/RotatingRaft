@@ -48,43 +48,104 @@ public class PlayerInput
         }
     };
 
+    protected enum Control {
+        Up,
+        Down,
+        Left,
+        Right,
+        A,
+        B,
+        Select,
+        Start
+    }
+
     class GamepadPlusKeyboardInputReceiver : PlayerInputReceiver {
-        public GamepadPlusKeyboardInputReceiver() : base(0) {}
+
+        private KeyMapping[]  keymap;
+
+        public GamepadPlusKeyboardInputReceiver(int player, KeyMapping[] keymap) : base(player) {
+            this.keymap = keymap;
+        }
+
         override public bool up {
-            get { return base.up || Input.GetKey(KeyCode.UpArrow); }
+            get { return base.up || Input.GetKey(KeyFor(Control.Up)); }
         }
         override public bool down {
-            get { return base.down || Input.GetKey(KeyCode.DownArrow); }
+            get { return base.down || Input.GetKey(KeyFor(Control.Down)); }
         }
         override public bool left {
-            get { return base.left || Input.GetKey(KeyCode.LeftArrow); }
+            get { return base.left || Input.GetKey(KeyFor(Control.Left)); }
         }
         override public bool right {
-            get { return base.right || Input.GetKey(KeyCode.RightArrow); }
+            get { return base.right || Input.GetKey(KeyFor(Control.Right)); }
         }
         override public bool a {
-            get { return base.a || Input.GetKey(KeyCode.Period); }
+            get { return base.a || Input.GetKey(KeyFor(Control.A)); }
         }
         override public bool aDown {
-            get { return base.aDown || Input.GetKeyDown(KeyCode.Period); }
+            get { return base.aDown || Input.GetKeyDown(KeyFor(Control.A)); }
         }
         override public bool b {
-            get { return base.a || Input.GetKey(KeyCode.Comma); }
+            get { return base.a || Input.GetKey(KeyFor(Control.B)); }
         }
         override public bool bDown {
-            get { return base.aDown || Input.GetKeyDown(KeyCode.Comma); }
+            get { return base.aDown || Input.GetKeyDown(KeyFor(Control.B)); }
         }
         override public bool start {
-            get { return base.start || Input.GetKey(KeyCode.Return); }
+            get { return base.start || Input.GetKey(KeyFor(Control.Start)); }
         }
         override public bool startDown {
-            get { return base.startDown || Input.GetKeyDown(KeyCode.Return); }
+            get { return base.startDown || Input.GetKeyDown(KeyFor(Control.Start)); }
+        }
+
+        protected KeyCode KeyFor(Control control) {
+            int i = 0;
+            while (keymap[i] != null) {
+                if (keymap[i].control == control) return keymap[i].key;
+                ++i;
+            }
+            return KeyCode.None;
         }
     }
 
+    class KeyMapping {
+        public Control control;
+        public KeyCode key;
+        public KeyMapping(Control control, KeyCode key) {
+            this.control = control;
+            this.key = key;
+        }
+    }
+
+    // Using slow-lookup array-of-arrays instead of a Dictionary,
+    // because we REALLY want this mapping to be static, and because number
+    // of elements is small.
+    static KeyMapping[][] keymaps = new KeyMapping[][]{
+        new KeyMapping[]{
+            new KeyMapping(Control.Up, KeyCode.UpArrow),
+            new KeyMapping(Control.Down, KeyCode.DownArrow),
+            new KeyMapping(Control.Left, KeyCode.LeftArrow),
+            new KeyMapping(Control.Right, KeyCode.RightArrow),
+            new KeyMapping(Control.A, KeyCode.Period),
+            new KeyMapping(Control.B, KeyCode.Comma),
+            new KeyMapping(Control.Start, KeyCode.Return),
+            null
+        },
+        new KeyMapping[]{
+            new KeyMapping(Control.Up, KeyCode.W),
+            new KeyMapping(Control.Down, KeyCode.S),
+            new KeyMapping(Control.Left, KeyCode.A),
+            new KeyMapping(Control.Right, KeyCode.D),
+            new KeyMapping(Control.A, KeyCode.LeftControl),
+            new KeyMapping(Control.B, KeyCode.LeftShift),
+            null,
+            null
+        }
+    };
+
     public static PlayerInputReceiver   GetInputReceiver(int playerNum) {
-        if (playerNum == 0)
-            return new GamepadPlusKeyboardInputReceiver();
+        if (playerNum >= 0 && playerNum <2)
+            return new GamepadPlusKeyboardInputReceiver(0, keymaps[playerNum]);
         else
             return new PlayerInputReceiver(playerNum);
     }
