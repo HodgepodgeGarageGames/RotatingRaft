@@ -37,6 +37,7 @@ public class Repair : MonoBehaviour
                 {
                     damageGrid.repairTile(damagedTile);
                     damagedTile = null;
+                    pab.repairSound.Play();
                 }
                 else
                 {

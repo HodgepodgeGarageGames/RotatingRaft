@@ -9,6 +9,8 @@ public class PlayersAssemblyBehavior : MonoBehaviour
     public GameObject vikingPrefab;
     public GameObject mermanPrefab;
 
+    public AudioSource repairSound;
+
     private List<Transform>         players = new List<Transform>();
     public float                    playerMaxSpeed = 1f;
     public float                    playerAcceleration = 1f; // secs per sec
@@ -18,6 +20,11 @@ public class PlayersAssemblyBehavior : MonoBehaviour
     void Start()
     {
         GameObject obj;
+
+        // If no players (jumped straight to scene), enable player one
+        if (GlobalGameData.numPlayers == 0)
+            GlobalGameData.playersIn[0] = true;
+
         // Create players
         obj = Instantiate(vikingPrefab, new Vector3(-0.5f, 0, 0), Quaternion.identity, transform);
         players.Add(obj.transform);
