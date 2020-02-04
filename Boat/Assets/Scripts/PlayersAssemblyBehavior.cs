@@ -17,20 +17,21 @@ public class PlayersAssemblyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject obj;
         // Create players
-        var obj = Instantiate(piratePrefab, new Vector3(-1.5f,0,0), Quaternion.identity, transform);
+        obj = Instantiate(vikingPrefab, new Vector3(-0.5f, 0, 0), Quaternion.identity, transform);
         players.Add(obj.transform);
         obj.SetActive(GlobalGameData.playersIn[0]);
 
-        obj = Instantiate(vikingPrefab, new Vector3(-0.5f, 0, 0), Quaternion.identity, transform);
+        obj = Instantiate(piratePrefab, new Vector3(-1.5f,0,0), Quaternion.identity, transform);
         players.Add(obj.transform);
         obj.SetActive(GlobalGameData.playersIn[1]);
 
-        obj = Instantiate(sailorPrefab, new Vector3(0.5f, 0, 0), Quaternion.identity, transform);
+        obj = Instantiate(mermanPrefab, new Vector3(1.5f, 0, 0), Quaternion.identity, transform);
         players.Add(obj.transform);
         obj.SetActive(GlobalGameData.playersIn[2]);
 
-        obj = Instantiate(mermanPrefab, new Vector3(1.5f, 0, 0), Quaternion.identity, transform);
+        obj = Instantiate(sailorPrefab, new Vector3(0.5f, 0, 0), Quaternion.identity, transform);
         players.Add(obj.transform);
         obj.SetActive(GlobalGameData.playersIn[3]);
     }
