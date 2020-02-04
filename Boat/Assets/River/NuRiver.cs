@@ -41,7 +41,9 @@ public class NuRiver : MonoBehaviour
     void Start()
     {
         // Scale riverThurst linearly from 1 (1 player) to 3 (4 players)
-        riverThrust = minRiverThrust + (GlobalGameData.numPlayers-1)*(maxRiverThrust-minRiverThrust)/3;
+        uint numPlayers = GlobalGameData.numPlayers;
+        if (numPlayers == 0) numPlayers = 1; // for testing (no players)
+        riverThrust = minRiverThrust + (numPlayers-1)*(maxRiverThrust-minRiverThrust)/3;
 
         rb2d = GetComponent<Rigidbody2D>();
 

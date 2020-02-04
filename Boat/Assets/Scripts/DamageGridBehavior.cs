@@ -82,11 +82,11 @@ public class DamageGridBehavior : MonoBehaviour
         }
     }
 
-    public void IncurDamage()
+    public bool IncurDamage()
     {
         if (Time.fixedTime - lastDamageTime < redamageGraceSecs) {
             Debug.Log("Not damaging due to grace period");
-            return;
+            return false;
         }
         lastDamageTime = Time.fixedTime;
 
@@ -105,6 +105,7 @@ public class DamageGridBehavior : MonoBehaviour
             StartCoroutine(gameover());
         }
 
+        return true;
     }
 
     public IEnumerator gameover()

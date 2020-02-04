@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RaftAssemblyBehavior : MonoBehaviour
 {
+    public AudioSource      crashSound;
     public float            minAngularVelocity = 8;  // 1 player
     public float            maxAngularVelocity = 20; // 4 players
+
     private float           angularVelocity = 20;
     private Rigidbody2D     raftBody;
     PlayersAssemblyBehavior players;
@@ -21,8 +23,9 @@ public class RaftAssemblyBehavior : MonoBehaviour
         players = GetComponentInChildren<PlayersAssemblyBehavior>();
 
         // Scale angularVelocity linearly from 8 (1 player) to 20 (4 playes)
-        angularVelocity = minAngularVelocity
-            + (GlobalGameData.numPlayers-1)*(maxAngularVelocity-minAngularVelocity)/3;
+        uint numPlayers = GlobalGameData.numPlayers;
+        if (numPlayers == 0) numPlayers = 1; // for testing (no players)
+        angularVelocity = minAngularVelocity + (numPlayers-1)*(maxAngularVelocity-minAngularVelocity)/3;
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class RaftAssemblyBehavior : MonoBehaviour
         Debug.Log("TRIGGERED");
         if (IsRiverCollider(col)) {
             var b = GetComponentInChildren<DamageGridBehavior>();
-            b.IncurDamage();
+            if (b.IncurDamage()) PlayCrash();
         }
     }
 
@@ -48,5 +51,10 @@ public class RaftAssemblyBehavior : MonoBehaviour
     {
         return typeof(EdgeCollider2D).IsInstanceOfType(col)
             && col.GetComponentInParent<NuRiver>() != null;
+    }
+
+    void PlayCrash()
+    {
+        crashSound.Play();
     }
 }
