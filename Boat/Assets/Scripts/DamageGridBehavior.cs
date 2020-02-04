@@ -8,7 +8,7 @@ public class DamageGridBehavior : MonoBehaviour
     public GameObject   tileObject;
     public int numberOfTilesToDamage = 5;
     public float fractionToDie = 0.33f;
-    public float redamageGraceSecs = 1;
+    public float redamageGraceSecs = 2;
     public int gridWidth = 16;
     public int gridHeight = 16;
     public float gridSpacing = 0.32f;

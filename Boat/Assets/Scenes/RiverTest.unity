@@ -850,6 +850,11 @@ PrefabInstance:
       propertyPath: gameOverObject
       value: 
       objectReference: {fileID: 492945525}
+    - target: {fileID: 3933474175949085163, guid: beded9b28d106714aa1d18ad5c4b737a,
+        type: 3}
+      propertyPath: redamageGraceSecs
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beded9b28d106714aa1d18ad5c4b737a, type: 3}
 --- !u!1 &1405290650

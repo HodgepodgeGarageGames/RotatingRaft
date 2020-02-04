@@ -38,7 +38,7 @@ public class RaftAssemblyBehavior : MonoBehaviour
         players.RotateBy(rot);
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         Debug.Log("TRIGGERED");
         if (IsRiverCollider(col)) {
