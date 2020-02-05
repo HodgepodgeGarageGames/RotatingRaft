@@ -12,6 +12,7 @@ public class DamageGridBehavior : MonoBehaviour
     public int gridWidth = 16;
     public int gridHeight = 16;
     public float gridSpacing = 0.32f;
+    public float repairFlashesPerSec = 2f;
     public GameObject   gameOverObject;
     private float lastDamageTime = 0;
     Transform[,] tileGrid;
@@ -69,6 +70,15 @@ public class DamageGridBehavior : MonoBehaviour
 
     public void repairTile(Transform tile)
     {
+        tile.gameObject.SetActive(false);
+        var b = tile.GetComponent<DamageTileBehavior>();
+        b.SetRepairing(false);
+
+        // Commented out the below, replacing with above.
+        // Why were we searching for the tile?
+        // was there some reason to think the tile could somehow fail
+        // to be in the tileGrid?
+        /*
         for (int i = 0; i < gridWidth; ++i)
         {
             for (int j = 0; j < gridHeight; ++j)
@@ -80,6 +90,7 @@ public class DamageGridBehavior : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     public bool IncurDamage()

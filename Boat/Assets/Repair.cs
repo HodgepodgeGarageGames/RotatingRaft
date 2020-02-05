@@ -25,6 +25,8 @@ public class Repair : MonoBehaviour
         if (playerInput.bDown)
         {
             damagedTile = damageGrid.getClosestDamagedTile(transform.position, 1.0f);
+            var b = damagedTile.GetComponent<DamageTileBehavior>();
+            b.SetRepairing(true);
 
             timeUntilRepair = 0.6f;
         }
@@ -44,6 +46,12 @@ public class Repair : MonoBehaviour
                     timeUntilRepair -= Time.deltaTime;
                 }
             }
+        }
+
+        if (damagedTile != null && !playerInput.b) {
+            var b = damagedTile.GetComponent<DamageTileBehavior>();
+            b.SetRepairing(false);
+            damagedTile = null;
         }
     }
 }
