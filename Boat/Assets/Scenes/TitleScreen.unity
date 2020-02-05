@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71b9caade597514091d7e98704060c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1617960349}
+  image: {fileID: 757289755}
   playerNumber: 2
   toon: {fileID: 2084310894}
 --- !u!1 &1109387572
@@ -2184,6 +2184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71b9caade597514091d7e98704060c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 757289755}
+  image: {fileID: 1617960349}
   playerNumber: 3
   toon: {fileID: 1859765382}
