@@ -33,7 +33,11 @@ public class DamageTileBehavior : MonoBehaviour
     void SetOpacity(float alpha)
     {
         var spr = GetComponent<SpriteRenderer>();
+        spr.enabled = (alpha > 0.5);
+        // Doesn't work in webgl player:
+        /*
         var c = spr.color;
         spr.color = new Color(c.r, c.g, c.b, alpha);
+        */
     }
 }
