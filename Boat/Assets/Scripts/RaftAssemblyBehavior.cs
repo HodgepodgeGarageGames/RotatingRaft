@@ -38,10 +38,18 @@ public class RaftAssemblyBehavior : MonoBehaviour
         players.RotateBy(rot);
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    /*void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log("TRIGGERED");
         if (IsRiverCollider(col)) {
+            var b = GetComponentInChildren<DamageGridBehavior>();
+            if (b.IncurDamage()) PlayCrash();
+        }
+    }*/
+
+    private void OnCollisionEnter2D (Collision2D collision)
+    {
+        if (IsRiverCollider(collision.collider))
+        {
             var b = GetComponentInChildren<DamageGridBehavior>();
             if (b.IncurDamage()) PlayCrash();
         }

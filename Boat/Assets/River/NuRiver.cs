@@ -15,9 +15,10 @@ public class NuRiver : MonoBehaviour
     [SerializeField] private Material[] waterTexture = new Material[3];
     [SerializeField] private GameObject[] treesNcrap = new GameObject[0];
     [SerializeField] private float minRiverThrust = 1f;
-    [SerializeField] private float maxRiverThrust = 3f;
+    [SerializeField] private float maxRiverThrust = 2f;
     private float riverThrust;
     [SerializeField] private Text scoreText = null;
+    [SerializeField] private Text hiscoreText = null;
 
     private LineRenderer middle = null;
     private LineRenderer top = null;
@@ -432,15 +433,33 @@ public class NuRiver : MonoBehaviour
         else
             waterRenderer.material = waterTexture[2];
 
-        scoreText.text = "Score: " + Mathf.FloorToInt(Time.time - startTime);
+        int score = Mathf.FloorToInt(Time.time - startTime);
+        scoreText.text = "Score: " + score + "s";
+
+        if (score > GlobalGameData.high_score)
+            GlobalGameData.high_score = score;
+
+        hiscoreText.text = "Hi Score: " + GlobalGameData.high_score + "s";
 
         if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerPrefs.SetInt("High Score", GlobalGameData.high_score);
             Application.Quit();
+        }
     }
 
     private void FixedUpdate()
     {
-        moveRiver(-Vector3.right * Time.fixedDeltaTime * riverThrust);
+        Vector3 riverVec = -Vector3.right * Time.fixedDeltaTime * riverThrust;
+        
+        //Harder the longer the game goes on for
+        riverVec *= 1.0f + ((Time.time - startTime) / 50.0f);
+
+        //Prevent people from going backward
+        if (transform.position.x > -30.0f)
+            riverVec = Vector3.right * (-10.0f / GlobalGameData.numPlayers);
+
+        moveRiver(riverVec);
     }
 
     private void produceLandscape()

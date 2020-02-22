@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -9,10 +10,22 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] private GameObject startButton = null;
     [SerializeField] private AButton[] abuttons = new AButton[4];
     [SerializeField] private TitleToon[] toon = new TitleToon[4];
+    [SerializeField] private Text hiscore = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.HasKey("High Score"))
+        {
+            GlobalGameData.high_score = PlayerPrefs.GetInt("High Score");
+            hiscore.text = GlobalGameData.high_score + "s";
+        }
+        else
+        {
+            GlobalGameData.high_score = 0;
+            hiscore.text = "0s";
+        }
+
         GlobalGameData.playersIn[0] = false;
         GlobalGameData.playersIn[1] = false;
         GlobalGameData.playersIn[2] = false;

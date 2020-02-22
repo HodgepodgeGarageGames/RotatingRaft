@@ -14,4 +14,6 @@ public static class GlobalGameData
             return ret;
         }
     }
+
+    public static int high_score = 0;
 }

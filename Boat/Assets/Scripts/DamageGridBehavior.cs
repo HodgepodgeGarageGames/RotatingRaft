@@ -32,9 +32,12 @@ public class DamageGridBehavior : MonoBehaviour
                 obj.name = $"Damage Tile [{i}, {j}]";
                 tileGrid[i, j] = obj.transform;
                 //checkerboard
-                if ((i % 3) != 0 || (j % 3) != 0) {
+                //if ((i % 3) != 0 || (j % 3) != 0) {
                     obj.SetActive(false);
-                }
+                //}
+
+                //size
+                obj.transform.localScale = new Vector3(16.0f / ((float)gridWidth), 16.0f / ((float)gridHeight), 1.0f);
             }
         }
     }
@@ -122,6 +125,8 @@ public class DamageGridBehavior : MonoBehaviour
     public IEnumerator gameover()
     {
         gameOverObject.SetActive(true);
+
+        PlayerPrefs.SetInt("High Score", GlobalGameData.high_score);
 
         yield return new WaitForSeconds(3.0f);
 
