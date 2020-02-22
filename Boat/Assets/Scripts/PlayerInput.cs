@@ -145,7 +145,7 @@ public class PlayerInput
 
     public static PlayerInputReceiver   GetInputReceiver(int playerNum) {
         if (playerNum >= 0 && playerNum <2)
-            return new GamepadPlusKeyboardInputReceiver(0, keymaps[playerNum]);
+            return new GamepadPlusKeyboardInputReceiver(playerNum, keymaps[playerNum]);
         else
             return new PlayerInputReceiver(playerNum);
     }
