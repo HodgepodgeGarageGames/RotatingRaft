@@ -86,10 +86,10 @@ public class PlayerInput
             get { return base.aDown || Input.GetKeyDown(KeyFor(Control.A)); }
         }
         override public bool b {
-            get { return base.a || Input.GetKey(KeyFor(Control.B)); }
+            get { return base.b || Input.GetKey(KeyFor(Control.B)); }
         }
         override public bool bDown {
-            get { return base.aDown || Input.GetKeyDown(KeyFor(Control.B)); }
+            get { return base.bDown || Input.GetKeyDown(KeyFor(Control.B)); }
         }
         override public bool start {
             get { return base.start || Input.GetKey(KeyFor(Control.Start)); }
