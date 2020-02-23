@@ -46,7 +46,16 @@ public class RaftAssemblyBehavior : MonoBehaviour
         }
     }*/
 
-    private void OnCollisionEnter2D (Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (IsRiverCollider(collision.collider))
+        {
+            var b = GetComponentInChildren<DamageGridBehavior>();
+            if (b.IncurDamage()) PlayCrash();
+        }
+    }
+
+    private void OnCollisionStay2D (Collision2D collision)
     {
         if (IsRiverCollider(collision.collider))
         {
